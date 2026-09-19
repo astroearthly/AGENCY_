@@ -1,0 +1,205 @@
+@import "tailwindcss" source(none);
+@import "tw-animate-css";
+@source "../src";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+  --font-mono: var(--font-heading);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-signal: var(--signal);
+  --color-cyan: var(--signal);
+  --color-magenta: var(--signal);
+  --color-verified: var(--foreground);
+  --color-fingerprint: var(--fingerprint);
+  --color-vault: var(--vault);
+  --shadow-signal: 0 0 22px color-mix(in oklab, var(--signal) 26%, transparent);
+  --shadow-cyan-soft: 0 0 22px color-mix(in oklab, var(--signal) 26%, transparent);
+  --shadow-magenta-soft: 0 0 22px color-mix(in oklab, var(--signal) 26%, transparent);
+  --shadow-verified-soft: 0 0 18px color-mix(in oklab, var(--foreground) 18%, transparent);
+  --shadow-security: 0 24px 80px color-mix(in oklab, var(--background) 85%, transparent);
+  --animate-status-blink: status-blink 1.8s steps(2, end) infinite;
+  --animate-fingerprint-scan: fingerprint-scan 1.7s ease-in-out infinite;
+}
+
+:root {
+  color-scheme: dark;
+  --radius: 0.25rem;
+  --font-heading: "Space Mono", ui-monospace, monospace;
+  --font-body: "Rubik", system-ui, sans-serif;
+  --background: oklch(0.085 0.003 265);
+  --foreground: oklch(0.9 0.005 250);
+  --card: oklch(0.125 0.004 265);
+  --card-foreground: oklch(0.9 0.005 250);
+  --popover: oklch(0.11 0.004 265);
+  --popover-foreground: oklch(0.9 0.005 250);
+  --primary: oklch(0.48 0.16 24);
+  --primary-foreground: oklch(0.96 0.005 250);
+  --secondary: oklch(0.17 0.005 260);
+  --secondary-foreground: oklch(0.82 0.006 250);
+  --muted: oklch(0.18 0.005 260);
+  --muted-foreground: oklch(0.58 0.008 250);
+  --accent: oklch(0.21 0.02 24);
+  --accent-foreground: oklch(0.88 0.02 24);
+  --destructive: oklch(0.48 0.16 24);
+  --destructive-foreground: oklch(0.96 0.005 250);
+  --border: oklch(0.24 0.006 255);
+  --input: oklch(0.2 0.006 255);
+  --ring: oklch(0.48 0.16 24);
+  --signal: oklch(0.48 0.16 24);
+  --fingerprint: oklch(0.55 0.006 250);
+  --vault: oklch(0.105 0.004 260);
+}
+
+.dark { color-scheme: dark; }
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body { min-width: 320px; overflow-x: hidden; background: var(--background); color: var(--foreground); font-family: var(--font-body); letter-spacing: 0; }
+  input, textarea { border-color: var(--border); background: color-mix(in oklab, var(--background) 78%, transparent); color: var(--foreground); }
+  input::placeholder, textarea::placeholder { color: var(--muted-foreground); }
+  ::selection { background: color-mix(in oklab, var(--signal) 55%, transparent); color: var(--foreground); }
+}
+
+@keyframes status-blink { 0%, 54% { opacity: 1; } 55%, 100% { opacity: 0.28; } }
+@keyframes page-scan { 0% { transform: translateY(-6vh); opacity: 0; } 8%, 85% { opacity: 0.42; } 100% { transform: translateY(106vh); opacity: 0; } }
+@keyframes fingerprint-scan { 0%, 100% { filter: drop-shadow(0 0 0 transparent); transform: scale(1); } 50% { filter: drop-shadow(0 0 10px var(--signal)); transform: scale(1.06); } }
+@keyframes laser-travel { to { stroke-dashoffset: -96; } }
+@keyframes face-break { 0%, 10%, 38%, 43%, 72%, 100% { transform: translateX(0); opacity: 0.25; } 39% { transform: translateX(-9px); opacity: 0.65; } 40% { transform: translateX(11px); opacity: 0.5; } 73% { transform: translateX(6px); opacity: 0.55; } }
+@keyframes frame-scan { from { transform: translateY(-110%); } to { transform: translateY(1100%); } }
+
+@utility noir-noise {
+  position: relative;
+  isolation: isolate;
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--foreground) 2%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--foreground) 1.5%, transparent) 1px, transparent 1px),
+    radial-gradient(circle at 50% 18%, color-mix(in oklab, var(--foreground) 5%, transparent), transparent 38rem);
+  background-size: 5px 5px, 7px 7px, auto;
+  &::after { content: ""; position: fixed; inset: 0; z-index: 80; pointer-events: none; opacity: 0.08; background-image: repeating-radial-gradient(circle at 20% 40%, var(--foreground) 0 0.4px, transparent 0.7px 3px); mix-blend-mode: screen; }
+}
+
+@utility page-scan {
+  position: fixed;
+  z-index: 90;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  pointer-events: none;
+  background: color-mix(in oklab, var(--foreground) 70%, transparent);
+  box-shadow: 0 0 14px color-mix(in oklab, var(--foreground) 24%, transparent);
+  animation: page-scan 13s linear infinite;
+}
+
+@utility shadow-signal { box-shadow: var(--shadow-signal); }
+
+@utility case-sheet { box-shadow: 0 30px 90px color-mix(in oklab, var(--background) 88%, transparent); }
+
+@utility evidence-board {
+  position: relative;
+  min-height: 680px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(color-mix(in oklab, var(--foreground) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--foreground) 3%, transparent) 1px, transparent 1px),
+    var(--vault);
+  background-size: 40px 40px;
+  box-shadow: 0 38px 100px color-mix(in oklab, var(--background) 92%, transparent) inset;
+}
+
+@utility laser-network {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  & path { fill: none; stroke: var(--signal); stroke-width: 2; stroke-dasharray: 12 12; filter: drop-shadow(0 0 5px var(--signal)); animation: laser-travel 7s linear infinite; }
+  & circle { fill: var(--signal); filter: drop-shadow(0 0 8px var(--signal)); }
+}
+
+@utility evidence-frame {
+  z-index: 10;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--foreground) 28%, var(--border));
+  background: var(--background);
+  box-shadow: 0 18px 45px color-mix(in oklab, var(--background) 90%, transparent);
+  aspect-ratio: 16 / 9;
+  transition: transform 450ms ease, border-color 450ms ease;
+  &:hover, &:focus-visible { z-index: 20; border-color: var(--signal); transform: scale(1.025); outline: none; }
+  & video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.35) brightness(0.55); transition: filter 450ms ease; }
+  &:hover video, &:focus-visible video { filter: grayscale(0.75) contrast(1.3) brightness(0.8); }
+}
+
+@utility evidence-a { position: absolute; left: 5%; top: 12%; width: 24%; transform: rotate(-2deg); }
+@utility evidence-b { position: absolute; right: 6%; top: 10%; width: 25%; transform: rotate(2deg); }
+@utility evidence-main { position: absolute; left: 50%; top: 50%; width: 39%; transform: translate(-50%, -50%); border-width: 2px; }
+@utility evidence-c { position: absolute; left: 11%; bottom: 8%; width: 22%; transform: rotate(-3deg); }
+@utility evidence-d { position: absolute; right: 10%; bottom: 8%; width: 23%; transform: rotate(2deg); }
+
+@utility frame-scan {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 10%;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--foreground) 11%, transparent), transparent);
+  animation: frame-scan 6s linear infinite;
+}
+
+@utility agent-portrait {
+  &::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, transparent 0 4px, color-mix(in oklab, var(--background) 55%, transparent) 4px 5px); opacity: 0.38; }
+}
+
+@utility face-glitch {
+  position: absolute;
+  z-index: 3;
+  left: 12%;
+  right: 12%;
+  top: 23%;
+  height: 24%;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent 0 7px, color-mix(in oklab, var(--signal) 52%, transparent) 7px 9px, color-mix(in oklab, var(--foreground) 24%, transparent) 9px 10px);
+  filter: blur(0.7px);
+  mix-blend-mode: screen;
+  animation: face-break 4.6s steps(1, end) infinite;
+}
+
+@utility fingerprint-plate {
+  position: relative;
+  &::after { content: ""; position: absolute; inset: -0.45rem; border: 1px solid currentColor; border-radius: 999px; opacity: 0.18; }
+}
+
+@media (max-width: 1023px) { .evidence-board { min-height: auto; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}
