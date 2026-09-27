@@ -12,7 +12,6 @@ import {
   Play,
   Radio,
   ScanLine,
-  Search,
   Send,
   ShieldCheck,
   Users,
@@ -108,12 +107,20 @@ export const agents: Agent[] = [
   },
 ];
 
-const reels = [
-  { id: "CAM_01", title: "THE OPENING STATEMENT", src: "https://videos.pexels.com/video-files/18069234/18069234-hd_1920_1080_24fps.mp4", placement: "evidence-a", type: "video" },
-  { id: "INTEL_02", title: "PRODUCT PROOF", src: "https://videos.pexels.com/video-files/3048527/3048527-hd_1920_1080_30fps.mp4", placement: "evidence-b", type: "video" },
-  { id: "PRIMARY_03", title: "THE SILENT OPERATIVE", src: "gP9FlgQaYi0", placement: "evidence-main", type: "youtube" },
-  { id: "TRACE_04", title: "CREATOR SIGNAL", src: "gP9FlgQaYi0", placement: "evidence-c", type: "youtube" },
-  { id: "ARCHIVE_05", title: "FINAL TRANSMISSION", src: "https://videos.pexels.com/video-files/5532765/5532765-hd_1920_1080_25fps.mp4", placement: "evidence-d", type: "video" },
+type Reel = {
+  id: string;
+  title: string;
+  src: string;
+  placement: string;
+  type: "vimeo" | "youtube" | "video";
+};
+
+const reels: Reel[] = [
+  { id: "CAM_01", title: "THE OPENING STATEMENT", src: "AcR63v-NlRs", placement: "evidence-a", type: "youtube" },
+  { id: "INTEL_02", title: "PRODUCT PROOF", src: "1230757187", placement: "evidence-b", type: "vimeo" },
+  { id: "PRIMARY_03", title: "FRACTURE - Cinematic Edit", src: "1164198582", placement: "evidence-main", type: "vimeo" },
+  { id: "TRACE_04", title: "CREATOR SIGNAL", src: "usHwnPdk49o", placement: "evidence-c", type: "youtube" },
+  { id: "ARCHIVE_05", title: "FINAL TRANSMISSION", src: "pPw_EAdMeh4", placement: "evidence-d", type: "youtube" },
 ];
 
 const differences = [
@@ -234,9 +241,9 @@ function EvidenceBoard() {
   return (
     <section id="evidence" className="border-y border-border bg-card/35 px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div><SectionLabel>Case file / 005</SectionLabel><h2 className="mt-4 font-display text-4xl font-bold sm:text-5xl">Evidence transmission board.</h2></div><p className="max-w-lg text-muted-foreground">Five active reels. One connected narrative. Noir-filtered transmissions.</p></div>
+        <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div><SectionLabel>Case file / 005</SectionLabel><h2 className="mt-4 font-display text-4xl font-bold sm:text-5xl">Evidence transmission board.</h2></div><p className="max-w-lg text-muted-foreground">Five active reels. Original color transmission - no filter.</p></div>
         <div className="evidence-board">
-          <div className="absolute left-5 top-5 z-30 border border-signal/40 bg-background/90 px-3 py-2 font-mono text-[9px] uppercase text-signal">Live visual intelligence / encrypted</div>
+          <div className="absolute left-5 top-5 z-30 border border-signal/40 bg-background/90 px-3 py-2 font-mono text-[9px] uppercase text-signal">Live visual intelligence / encrypted / COLOR FEED</div>
           <svg className="laser-network" viewBox="0 0 1200 680" preserveAspectRatio="none" aria-hidden="true"><path d="M180 155 L600 330 L1010 165 M600 330 L255 540 M600 330 L955 535" /><circle cx="180" cy="155" r="5" /><circle cx="600" cy="330" r="6" /><circle cx="1010" cy="165" r="5" /><circle cx="255" cy="540" r="5" /><circle cx="955" cy="535" r="5" /></svg>
           <div className="hidden lg:block">{reels.map((reel) => <EvidenceFrame key={reel.id} reel={reel} />)}</div>
           <div className="grid gap-5 p-4 pt-20 lg:hidden">{reels.map((reel) => <EvidenceFrame key={reel.id} reel={reel} mobile />)}</div>
@@ -246,20 +253,50 @@ function EvidenceBoard() {
   );
 }
 
-function EvidenceFrame({ reel, mobile = false }: { reel: (typeof reels)[number]; mobile?: boolean }) {
+function EvidenceFrame({ reel, mobile = false }: { reel: Reel; mobile?: boolean }) {
+  const isVimeo = reel.type === "vimeo";
   const isYoutube = reel.type === "youtube";
 
   return (
     <article className={cn("evidence-frame group overflow-hidden", mobile ? "relative" : reel.placement)} tabIndex={0}>
-      <video src={reel.src} muted autoPlay loop playsInline preload="metadata" crossOrigin="anonymous" aria-label={`${reel.title} portfolio reel`} className="absolute inset-0 h-full w-full object-cover grayscale contrast-[1.4] brightness-[0.85]" style={{ filter: "grayscale(100%) contrast(1.4) brightness(0.85)" }} />
-      <div className="absolute inset-0 bg-background/20 mix-blend-multiply" aria-hidden="true" />
-      <div className="absolute inset-0 bg-signal/[0.06] mix-blend-overlay opacity-60 group-hover:opacity-40 transition-opacity" aria-hidden="true" />
-      <div className="absolute inset-0 border border-border/50 group-hover:border-signal/50 transition-colors" aria-hidden="true" />
-      <div className="frame-scan" aria-hidden="true" />
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/80 to-transparent p-4 pt-12">
-        <p className="font-mono text-[9px] text-signal">{reel.id} / PLAYING</p><h3 className="mt-1 font-display text-sm font-bold text-foreground sm:text-base drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]">{reel.title}</h3>
+      {isVimeo ? (
+        <iframe
+          src={`https://player.vimeo.com/video/${reel.src}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1&title=0&byline=0&portrait=0`}
+          title={reel.title}
+          className="absolute inset-0 h-full w-full"
+          style={{ border: 0 }}
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      ) : isYoutube ? (
+        <iframe
+          src={`https://www.youtube.com/embed/${reel.src}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playlist=${reel.src}&playsinline=1`}
+          title={reel.title}
+          className="absolute inset-0 h-full w-full"
+          style={{ border: 0 }}
+          allow="autoplay; encrypted-media; fullscreen"
+        />
+      ) : (
+        <video 
+          src={reel.src} 
+          muted 
+          autoPlay 
+          loop 
+          playsInline 
+          preload="metadata" 
+          crossOrigin="anonymous"
+          aria-label={`${reel.title} portfolio reel`} 
+          className="absolute inset-0 h-full w-full object-cover" 
+          style={{ border: 0 }}
+        />
+      )}
+      <div className="absolute inset-0 border border-border/50 group-hover:border-signal/50 transition-colors pointer-events-none" aria-hidden="true" />
+      <div className="frame-scan pointer-events-none" aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/80 to-transparent p-4 pt-12 pointer-events-none">
+        <p className="font-mono text-[9px] text-signal">{reel.id} / PLAYING • COLOR</p>
+        <h3 className="mt-1 font-display text-sm font-bold text-foreground sm:text-base drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]">{reel.title}</h3>
       </div>
-      <Play className="absolute right-4 top-4 h-5 w-5 text-foreground/80 transition group-hover:text-signal group-hover:scale-110 drop-shadow" />
+      <Play className="absolute right-4 top-4 h-5 w-5 text-foreground/80 transition group-hover:text-signal group-hover:scale-110 drop-shadow pointer-events-none" />
     </article>
   );
 }
@@ -304,75 +341,27 @@ function VsStandardAgencies() {
     { label: "Data", standard: "Views and vibes.", confidential: "Retention autopsy, CTR, hold rate, drop-off frame. We isolate where you lose them." },
     { label: "Speed vs Leverage", standard: "Fast and forgettable.", confidential: "Built for leverage. One shoot becomes 20+ assets, sales system, evergreen vault." },
   ];
-
   return (
     <section id="vs" className="relative border-y border-border bg-background px-4 py-24 sm:px-6 lg:px-8">
       <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-border to-transparent lg:block" aria-hidden="true" />
-      
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 border border-signal/40 bg-signal/10 px-3 py-1 font-mono text-[10px] uppercase text-signal">
-            <Target className="h-3.5 w-3.5" /> Threat Assessment // Standard Agencies vs CONFIDENTIAL_
-          </div>
-          <h2 className="mt-6 font-display text-4xl font-bold uppercase leading-[0.95] sm:text-6xl">
-            Standard agencies <span className="text-muted-foreground line-through decoration-signal decoration-2">edit for looks.</span><br/>
-            We edit for <span className="text-signal">leverage.</span>
-          </h2>
-          <p className="mx-auto mt-6 max-w-2xl leading-8 text-muted-foreground">
-            Most agencies are content factories. We are a <span className="text-foreground">classified visual intelligence unit</span>. 
-            They ship videos. We build retention systems that compound.
-          </p>
+          <div className="inline-flex items-center gap-2 border border-signal/40 bg-signal/10 px-3 py-1 font-mono text-[10px] uppercase text-signal"><Target className="h-3.5 w-3.5" /> Threat Assessment // Standard Agencies vs CONFIDENTIAL_</div>
+          <h2 className="mt-6 font-display text-4xl font-bold uppercase leading-[0.95] sm:text-6xl">Standard agencies <span className="text-muted-foreground line-through decoration-signal decoration-2">edit for looks.</span><br/>We edit for <span className="text-signal">leverage.</span></h2>
+          <p className="mx-auto mt-6 max-w-2xl leading-8 text-muted-foreground">Most agencies are content factories. We are a <span className="text-foreground">classified visual intelligence unit</span>. They ship videos. We build retention systems that compound.</p>
         </div>
-
         <div className="relative mt-16 grid overflow-hidden border border-border bg-border">
-          {/* Header Row */}
-          <div className="grid grid-cols-2 gap-px bg-border">
-            <div className="bg-card/60 p-5 sm:p-7 flex items-center justify-between">
-              <div className="flex items-center gap-3"><FileX className="h-5 w-5 text-muted-foreground" /><span className="font-display text-lg font-bold text-muted-foreground uppercase tracking-wide">Standard Protocol</span></div>
-              <Badge variant="outline" className="border-border bg-background font-mono text-[10px] text-muted-foreground">COMPROMISED</Badge>
-            </div>
-            <div className="bg-card p-5 sm:p-7 flex items-center justify-between border-l-2 border-signal/60">
-              <div className="flex items-center gap-3"><ShieldCheck className="h-5 w-5 text-signal" /><span className="font-display text-lg font-bold uppercase tracking-wide">CONFIDENTIAL_ Protocol</span></div>
-              <Badge className="border-signal/40 bg-signal/10 font-mono text-[10px] text-signal"><BadgeCheck className="h-3 w-3 mr-1" /> VERIFIED</Badge>
-            </div>
-          </div>
-
-          {/* VS Badge Center */}
+          <div className="grid grid-cols-2 gap-px bg-border"><div className="bg-card/60 p-5 sm:p-7 flex items-center justify-between"><div className="flex items-center gap-3"><FileX className="h-5 w-5 text-muted-foreground" /><span className="font-display text-lg font-bold text-muted-foreground uppercase tracking-wide">Standard Protocol</span></div><Badge variant="outline" className="border-border bg-background font-mono text-[10px] text-muted-foreground">COMPROMISED</Badge></div><div className="bg-card p-5 sm:p-7 flex items-center justify-between border-l-2 border-signal/60"><div className="flex items-center gap-3"><ShieldCheck className="h-5 w-5 text-signal" /><span className="font-display text-lg font-bold uppercase tracking-wide">CONFIDENTIAL_ Protocol</span></div><Badge className="border-signal/40 bg-signal/10 font-mono text-[10px] text-signal"><BadgeCheck className="h-3 w-3 mr-1" /> VERIFIED</Badge></div></div>
           <div className="absolute left-1/2 top-[88px] z-20 hidden -translate-x-1/2 border border-border bg-background px-4 py-2 font-display text-sm font-bold tracking-widest lg:block">VS</div>
-
-          {/* Comparison Rows */}
-          {rows.map((row, i) => (
+          {rows.map((row) => (
             <div key={row.label} className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-border">
-              <div className="bg-card/40 p-6 sm:p-7 opacity-70">
-                <div className="font-mono text-[10px] uppercase text-muted-foreground mb-2 flex items-center gap-2"><X className="h-3.5 w-3.5" /> {row.label}</div>
-                <p className="text-sm leading-6 text-muted-foreground line-through decoration-muted-foreground/30">{row.standard}</p>
-              </div>
-              <div className="bg-card p-6 sm:p-7 border-l-0 lg:border-l-2 border-l-signal/30">
-                <div className="font-mono text-[10px] uppercase text-signal mb-2 flex items-center gap-2"><Check className="h-3.5 w-3.5" /> {row.label}</div>
-                <p className="text-sm leading-6 text-foreground font-medium">{row.confidential}</p>
-              </div>
+              <div className="bg-card/40 p-6 sm:p-7 opacity-70"><div className="font-mono text-[10px] uppercase text-muted-foreground mb-2 flex items-center gap-2"><X className="h-3.5 w-3.5" /> {row.label}</div><p className="text-sm leading-6 text-muted-foreground line-through decoration-muted-foreground/30">{row.standard}</p></div>
+              <div className="bg-card p-6 sm:p-7 border-l-0 lg:border-l-2 border-l-signal/30"><div className="font-mono text-[10px] uppercase text-signal mb-2 flex items-center gap-2"><Check className="h-3.5 w-3.5" /> {row.label}</div><p className="text-sm leading-6 text-foreground font-medium">{row.confidential}</p></div>
             </div>
           ))}
-
-          {/* Bottom Statement */}
-          <div className="bg-vault p-8 sm:p-10 text-center border-t border-border">
-            <div className="mx-auto max-w-3xl">
-              <p className="font-display text-2xl font-bold sm:text-3xl">We are not cheaper. We are not faster. We are <span className="text-signal">final.</span></p>
-              <p className="mt-4 font-mono text-[11px] uppercase text-muted-foreground">If you want another video, hire anyone. If you want a system that makes every future video perform, initiate case.</p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-                <Button asChild variant="case" size="case"><Link to="/work"><Eye className="h-4 w-4" />See The Difference In Work</Link></Button>
-                <Button asChild variant="covert" size="case"><a href="#about"><Skull className="h-4 w-4" />Read Agency Dossier</a></Button>
-              </div>
-            </div>
-          </div>
+          <div className="bg-vault p-8 sm:p-10 text-center border-t border-border"><div className="mx-auto max-w-3xl"><p className="font-display text-2xl font-bold sm:text-3xl">We are not cheaper. We are not faster. We are <span className="text-signal">final.</span></p><p className="mt-4 font-mono text-[11px] uppercase text-muted-foreground">If you want another video, hire anyone. If you want a system that makes every future video perform, initiate case.</p><div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center"><Button asChild variant="case" size="case"><Link to="/work"><Eye className="h-4 w-4" />See The Difference In Work</Link></Button><Button asChild variant="covert" size="case"><a href="#about"><Skull className="h-4 w-4" />Read Agency Dossier</a></Button></div></div></div>
         </div>
-
-        {/* Small stats under */}
-        <div className="mt-8 grid grid-cols-3 border border-border bg-card/50 font-mono text-[10px] uppercase">
-          <div className="p-4 text-center border-r border-border"><span className="text-muted-foreground">Standard Avg Retention</span><div className="mt-1 font-display text-xl font-bold text-muted-foreground">18%</div></div>
-          <div className="p-4 text-center border-r border-border bg-signal/5"><span className="text-signal">CONFIDENTIAL_ Avg Retention</span><div className="mt-1 font-display text-xl font-bold text-signal">68%</div></div>
-          <div className="p-4 text-center"><span className="text-muted-foreground">Difference</span><div className="mt-1 font-display text-xl font-bold text-foreground">+277%</div></div>
-        </div>
+        <div className="mt-8 grid grid-cols-3 border border-border bg-card/50 font-mono text-[10px] uppercase"><div className="p-4 text-center border-r border-border"><span className="text-muted-foreground">Standard Avg Retention</span><div className="mt-1 font-display text-xl font-bold text-muted-foreground">18%</div></div><div className="p-4 text-center border-r border-border bg-signal/5"><span className="text-signal">CONFIDENTIAL_ Avg Retention</span><div className="mt-1 font-display text-xl font-bold text-signal">68%</div></div><div className="p-4 text-center"><span className="text-muted-foreground">Difference</span><div className="mt-1 font-display text-xl font-bold text-foreground">+277%</div></div></div>
       </div>
     </section>
   );
