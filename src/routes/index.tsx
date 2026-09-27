@@ -109,11 +109,11 @@ export const agents: Agent[] = [
 ];
 
 const reels = [
-  { id: "CAM_01", title: "THE OPENING STATEMENT", src: "https://videos.pexels.com/video-files/18069234/18069234-hd_1920_1080_24fps.mp4", placement: "evidence-a" },
-  { id: "INTEL_02", title: "PRODUCT PROOF", src: "https://videos.pexels.com/video-files/3048527/3048527-hd_1920_1080_30fps.mp4", placement: "evidence-b" },
-  { id: "PRIMARY_03", title: "THE SILENT OPERATIVE", src: "https://videos.pexels.com/video-files/1409899/1409899-hd_1920_1080_25fps.mp4", placement: "evidence-main" },
-  { id: "TRACE_04", title: "CREATOR SIGNAL", src: "https://videos.pexels.com/video-files/3209211/3209211-hd_1920_1080_25fps.mp4", placement: "evidence-c" },
-  { id: "ARCHIVE_05", title: "FINAL TRANSMISSION", src: "https://videos.pexels.com/video-files/5532765/5532765-hd_1920_1080_25fps.mp4", placement: "evidence-d" },
+  { id: "CAM_01", title: "THE OPENING STATEMENT", src: "https://videos.pexels.com/video-files/18069234/18069234-hd_1920_1080_24fps.mp4", placement: "evidence-a", type: "video" },
+  { id: "INTEL_02", title: "PRODUCT PROOF", src: "https://videos.pexels.com/video-files/3048527/3048527-hd_1920_1080_30fps.mp4", placement: "evidence-b", type: "video" },
+  { id: "PRIMARY_03", title: "THE SILENT OPERATIVE", src: "gP9FlgQaYi0", placement: "evidence-main", type: "youtube" },
+  { id: "TRACE_04", title: "CREATOR SIGNAL", src: "https://videos.pexels.com/video-files/3209211/3209211-hd_1920_1080_25fps.mp4", placement: "evidence-c", type: "video" },
+  { id: "ARCHIVE_05", title: "FINAL TRANSMISSION", src: "https://videos.pexels.com/video-files/5532765/5532765-hd_1920_1080_25fps.mp4", placement: "evidence-d", type: "video" },
 ];
 
 const differences = [
