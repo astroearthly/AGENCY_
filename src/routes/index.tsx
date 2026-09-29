@@ -70,9 +70,9 @@ type IntakeForm = Record<IntakeField, string>;
 
 export const agents: Agent[] = [
   {
-    codename: "AGENT VECTOR",
+    codename: "AGENT 01",
     id: "44-B2B-01",
-    niche: "B2B",
+    niche: "FILM",
     clearance: "Growth Intelligence",
     image: agentB2B,
     Icon: BriefcaseBusiness,
@@ -82,9 +82,9 @@ export const agents: Agent[] = [
     pastEdits: [{ title: "Proof Sequence", metric: "+43% hold" }, { title: "Launch Intercept", metric: "2.1x CTR" }],
   },
   {
-    codename: "AGENT VELVET",
+    codename: "AGENT 02",
     id: "44-LCB-02",
-    niche: "Lifestyle & Creator Brands",
+    niche: "Motion Design",
     clearance: "Culture Operative",
     image: agentCreator,
     Icon: Camera,
@@ -94,9 +94,9 @@ export const agents: Agent[] = [
     pastEdits: [{ title: "Velvet Dispatch", metric: "+52% shares" }, { title: "Identity File", metric: "31s hold" }],
   },
   {
-    codename: "AGENT NOCTURNE",
+    codename: "AGENT 03",
     id: "44-CIN-03",
-    niche: "Cinematic",
+    niche: "Creator Content",
     clearance: "Narrative Operative",
     image: agentCinematic,
     Icon: Film,
@@ -258,12 +258,12 @@ function EvidenceFrame({ reel, mobile = false }: { reel: Reel; mobile?: boolean 
   const isYoutube = reel.type === "youtube";
 
   return (
-    <article className={cn("evidence-frame group overflow-hidden", mobile ? "relative" : reel.placement)} tabIndex={0}>
+<article className={cn("evidence-frame group overflow-hidden", mobile ? "relative" : reel.placement)} tabIndex={0}>
       {isVimeo ? (
         <iframe
           src={`https://player.vimeo.com/video/${reel.src}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1&title=0&byline=0&portrait=0`}
           title={reel.title}
-          className="absolute inset-0 h-full w-full"
+          className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-105"
           style={{ border: 0 }}
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
           referrerPolicy="strict-origin-when-cross-origin"
@@ -272,7 +272,7 @@ function EvidenceFrame({ reel, mobile = false }: { reel: Reel; mobile?: boolean 
         <iframe
           src={`https://www.youtube.com/embed/${reel.src}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playlist=${reel.src}&playsinline=1`}
           title={reel.title}
-          className="absolute inset-0 h-full w-full"
+          className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-105"
           style={{ border: 0 }}
           allow="autoplay; encrypted-media; fullscreen"
         />
@@ -286,7 +286,7 @@ function EvidenceFrame({ reel, mobile = false }: { reel: Reel; mobile?: boolean 
           preload="metadata" 
           crossOrigin="anonymous"
           aria-label={`${reel.title} portfolio reel`} 
-          className="absolute inset-0 h-full w-full object-cover" 
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" 
           style={{ border: 0 }}
         />
       )}

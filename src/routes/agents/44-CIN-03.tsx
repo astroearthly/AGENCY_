@@ -1,74 +1,157 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  BadgeCheck,
+  ChevronRight,
+  Clapperboard,
   Crosshair,
   FileText,
-  Film,
   LockKeyhole,
+  ArrowUpRight,
   ShieldAlert,
 } from "lucide-react";
-import agentCinematic from "@/assets/agent-cinematic-noir.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/agents/44-CIN-03")({
-  component: Card3Page,
+  component: Card1Page,
 });
 
-function Card3Page() {
+function Card1Page() {
+  const vids = [
+    "https://player.vimeo.com/video/1231088285?background=1&autoplay=1&loop=1&byline=0&title=0",
+    "https://player.vimeo.com/video/1231088286?background=1&autoplay=1&loop=1&byline=0&title=0",
+    "https://player.vimeo.com/video/1231115435?background=1&autoplay=1&loop=1&byline=0&title=0",
+  ];
+
   return (
-    <main className="noir-noise min-h-screen overflow-hidden bg-background text-foreground">
-      <div className="page-scan" aria-hidden="true" />
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-background text-foreground">
+      <header className="fixed inset-x-0 top-0 z-50 h-[72px] border-b border-border bg-background/90 backdrop-blur-xl">
+        <div className="mx-auto flex h-full max-w-[1600px] items-center justify-between gap-5 px-4 sm:px-6 lg:px-8">
           <Link to="/" className="flex items-center gap-3">
             <span className="h-2 w-2 bg-signal shadow-signal animate-status-blink" />
             <span className="font-display text-lg font-bold">CONFIDENTIAL_</span>
           </Link>
-          <Button asChild variant="covert" size="case"><Link to="/" hash="agents">Back to HQ</Link></Button>
+          <Button asChild variant="covert" size="case">
+            <Link to="/" hash="agents">Back to HQ</Link>
+          </Button>
         </div>
       </header>
 
-      <div className="mx-auto max-w-7xl px-4 pb-24 pt-28 sm:px-6 lg:px-8">
-        <div className="mb-8 flex gap-3 font-mono text-[10px] uppercase">
-          <Badge className="border-signal/40 bg-signal/10 text-signal"><BadgeCheck className="h-3.5 w-3.5 mr-1" /> CARD 3 // VERIFIED</Badge>
-          <Badge variant="outline">44-CIN-03 // Cinematic</Badge>
-        </div>
-
-        <div className="space-y-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="font-display text-6xl font-bold">AGENT NOCTURNE</h1>
-            <p className="mt-3 font-mono text-xs text-signal flex items-center justify-center gap-2"><Film className="h-4 w-4" /> Narrative Operative // Cinematic</p>
-            <p className="mt-4 text-muted-foreground leading-7">Builds atmosphere, tension, sound, and visual rhythm for films that need to feel larger than their footage.</p>
-          </div>
-
-          <div className="relative overflow-hidden rounded-lg border border-border">
-            <img src={agentCinematic} alt="AGENT NOCTURNE" className="h-[480px] w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
-              <div><div className="font-mono text-[10px] text-signal">CINEMATIC FEED // 44-CIN-03</div><div className="font-display text-2xl font-bold mt-1">Night Division</div></div>
-              <div className="font-mono text-xs text-signal flex items-center gap-1"><ShieldAlert className="h-4 w-4" /> 92% completion</div>
-            </div>
-          </div>
-
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2 border border-border bg-card/60 p-6">
-              <div className="font-mono text-xs text-signal mb-4">Portfolio Work</div>
-              <div className="grid gap-3 sm:grid-cols-3">
-                <div className="border border-border p-4 bg-background/50"><div className="text-sm font-bold">Brand documentary</div><div className="text-xs text-muted-foreground mt-2">Feature length narrative</div></div>
-                <div className="border border-border p-4 bg-background/50"><div className="text-sm font-bold">Narrative campaign film</div><div className="text-xs text-muted-foreground mt-2">Tension-first edit</div></div>
-                <div className="border border-border p-4 bg-background/50"><div className="text-sm font-bold">Title and motion package</div><div className="text-xs text-muted-foreground mt-2">Complete sonic identity</div></div>
+      <div className="mx-auto max-w-[1600px] px-4 pt-[72px] sm:px-6 lg:px-8">
+        {/* items-start is required: otherwise the left cell stretches to the full row height and sticky has no room to move */}
+        <div className="grid lg:grid-cols-12 lg:items-start border-x border-border/50">
+          {/* LEFT: sticky. Pins while the grid is on screen, scrolls away when the grid ends. */}
+          <div className="lg:col-span-5 lg:sticky lg:top-[72px] border-b lg:border-b-0 lg:border-r border-border/50 bg-background">
+            <div className="p-6 sm:p-8 lg:p-10 space-y-8">
+              <div className="flex items-start justify-between gap-8 font-mono text-[11px] uppercase leading-[1.4]">
+                <div className="space-y-1 text-muted-foreground">
+                  <div className="text-foreground font-bold">44-B2B-01</div>
+                  <div>AGENT VECTOR // Growth Intelligence</div>
+                  <div>2019 — Present</div>
+                </div>
+                <Link to="/work" className="text-foreground hover:text-signal flex flex-col items-end gap-0.5 shrink-0">
+                  <span className="flex items-center gap-1">See Work <ArrowUpRight className="h-3 w-3" /></span>
+                  <span>Case Studies</span>
+                </Link>
               </div>
-            </div>
-            <div className="space-y-3">
-              <div className="border border-border bg-card/40 p-4">
-                <div className="font-mono text-[10px] uppercase text-muted-foreground">Past Edits</div>
-                <div className="mt-3 space-y-3">
-                  <div className="flex justify-between items-center"><span className="text-sm">Night Division</span><span className="text-signal font-bold">92%</span></div>
-                  <div className="flex justify-between items-center"><span className="text-sm">Silent Cut</span><span className="text-signal font-bold">3 awards</span></div>
+
+              <h1 className="font-display text-5xl sm:text-6xl leading-[0.95] tracking-tight">
+                <span className="font-mono text-4xl">44</span> for <span className="font-bold">B2B</span>
+              </h1>
+              <h2 className="font-serif text-xl sm:text-2xl leading-[1.2] tracking-tight text-foreground">
+                For <span className="font-bold">B2B brands</span> running complex offers, we had the pleasure of turning founder expertise and product proof into <span className="font-bold">a retention system</span> that compounds.
+              </h2>
+              <p className="text-sm leading-[1.7] text-muted-foreground">
+                Turns complex offers, founder expertise, and product evidence into direct, high-retention business narratives.
+              </p>
+
+              <div className="h-px bg-border/50" />
+              <p className="text-sm leading-[1.8] text-muted-foreground">
+                <span className="text-foreground font-medium">Working closely with founders and GTM teams,</span> we translated technical proof into narrative leverage.
+              </p>
+
+              <div className="border border-border bg-card/30">
+                <div className="border-b border-border px-4 py-3 flex items-center gap-2 font-mono text-[11px] uppercase text-signal">
+                  <Clapperboard className="h-3.5 w-3.5" /> Portfolio // 03 Active Operations
+                </div>
+                <div className="divide-y divide-border/50">
+                  <div className="flex items-center justify-between px-4 py-3 text-sm"><span className="flex items-center gap-2"><ChevronRight className="h-3 w-3 text-signal" /> Founder authority</span><span className="font-mono text-xs text-muted-foreground">+43% hold</span></div>
+                  <div className="flex items-center justify-between px-4 py-3 text-sm"><span className="flex items-center gap-2"><ChevronRight className="h-3 w-3 text-signal" /> Product launch</span><span className="font-mono text-xs text-muted-foreground">2.1x CTR</span></div>
                 </div>
               </div>
-              <Button asChild variant="case" size="case" className="w-full"><Link to="/" hash="intake"><FileText className="h-4 w-4 mr-2" />Request Assignment</Link></Button>
+
+              <div className="space-y-3">
+                <div className="font-mono text-[11px] uppercase text-signal flex items-center gap-2"><FileText className="h-3.5 w-3.5" /> Field History</div>
+                <ul className="space-y-3 text-sm leading-[1.6] text-muted-foreground list-disc pl-4 marker:text-signal">
+                  <li>Reframed a technical demo around proof before process — +43% retention.</li>
+                  <li>Built a modular sales-video system from one interview day — 12 assets.</li>
+                </ul>
+              </div>
+
+              <div className="border-t border-border/50 pt-8">
+                <div className="flex items-center justify-between mb-4 font-mono text-[11px] uppercase text-muted-foreground">
+                  <span className="flex items-center gap-2"><Crosshair className="h-3.5 w-3.5 text-signal" /> Clearance: Growth Intelligence</span>
+                  <span className="flex items-center gap-1 text-signal"><ShieldAlert className="h-3 w-3" /> Verified</span>
+                </div>
+                <Button asChild variant="case" size="case" className="w-full justify-between">
+                  <Link to="/" hash="intake"><span className="flex items-center gap-2"><LockKeyhole className="h-4 w-4" /> Request Assignment</span><ArrowUpRight className="h-4 w-4" /></Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: normal flow. */}
+          <div className="lg:col-span-7 bg-[#080808]">
+            <div className="p-4 sm:p-6 lg:p-8 space-y-6">
+              
+              {/* CAM 01 - 9:16 Vertical */}
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
+                <div className="relative w-full aspect-[9/16] bg-black">
+                  <iframe 
+                    src={vids[0]} 
+                    className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    title="CAM_01 // FOUNDER AUTHORITY"
+                  />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border">
+                  <div className="font-display text-sm font-bold tracking-widest uppercase">CAM_01 // FOUNDER AUTHORITY</div>
+                  <Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">+43% HOLD</Badge>
+                </div>
+              </div>
+
+              {/* CAM 02 - 9:16 Vertical */}
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
+                <div className="relative w-full aspect-[9/16] bg-black">
+                  <iframe 
+                    src={vids[1]} 
+                    className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    title="CAM_02 // PRODUCT PROOF"
+                  />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border">
+                  <div className="font-display text-sm font-bold tracking-widest uppercase">CAM_02 // PRODUCT PROOF</div>
+                  <Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">2.1x CTR</Badge>
+                </div>
+              </div>
+
+              {/* CAM 03 - 9:16 Vertical */}
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
+                <div className="relative w-full aspect-[9/16] bg-black">
+                  <iframe 
+                    src={vids[2]} 
+                    className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    title="CAM_03 // DEMAND CUTDOWNS"
+                  />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border">
+                  <div className="font-display text-sm font-bold tracking-widest uppercase">CAM_03 // DEMAND CUTDOWNS</div>
+                  <Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge>
+                </div>
+              </div>
+
+              <div className="h-16" />
             </div>
           </div>
         </div>
