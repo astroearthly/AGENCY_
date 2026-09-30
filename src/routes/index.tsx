@@ -25,7 +25,7 @@ import {
   FileX,
   type LucideIcon,
 } from "lucide-react";
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent, useEffect } from "react";
 
 import agentB2B from "@/assets/agent-b2b-noir.jpg";
 import agentCinematic from "@/assets/agent-cinematic-noir.jpg";
@@ -70,37 +70,37 @@ type IntakeForm = Record<IntakeField, string>;
 
 export const agents: Agent[] = [
   {
-    codename: "AGENT 01",
+    codename: "TEAM 01",
     id: "44-B2B-01",
     niche: "FILM",
     clearance: "Growth Intelligence",
     image: agentB2B,
     Icon: BriefcaseBusiness,
-    summary: "Turns complex offers, founder expertise, and product evidence into direct, high-retention business narratives.",
+    summary: "We shape raw footage into cinematic stories with rhythm, atmosphere, and purpose. From commercial edits to narrative-driven films, we control every cut to make the final piece feel intentional.",
     portfolio: ["Founder authority series", "Product launch film", "Demand generation cutdowns"],
     history: ["Reframed a technical demo around proof before process.", "Built a modular sales-video system from one interview day."],
     pastEdits: [{ title: "Proof Sequence", metric: "+43% hold" }, { title: "Launch Intercept", metric: "2.1x CTR" }],
   },
   {
-    codename: "AGENT 02",
+    codename: "TEAM 02",
     id: "44-LCB-02",
     niche: "Motion Design",
     clearance: "Culture Operative",
     image: agentCreator,
     Icon: Camera,
-    summary: "Finds the intimate human beat inside creator footage, lifestyle campaigns, and personality-led brands.",
+    summary: "We transform ideas into movement through graphic design, animation, and visual systems. Every frame is designed to communicate clearly, move naturally, and leave a lasting impression.",
     portfolio: ["Creator launch reel", "Lifestyle campaign", "Episodic social system"],
     history: ["Converted a casual shoot into a premium story arc.", "Built repeatable cold opens around personality and tension."],
     pastEdits: [{ title: "Velvet Dispatch", metric: "+52% shares" }, { title: "Identity File", metric: "31s hold" }],
   },
   {
-    codename: "AGENT 03",
+    codename: "TEAM 03",
     id: "44-CIN-03",
     niche: "Creator Content",
     clearance: "Narrative Operative",
     image: agentCinematic,
     Icon: Film,
-    summary: "Builds atmosphere, tension, sound, and visual rhythm for films that need to feel larger than their footage.",
+    summary: "We turn creator footage into sharp, engaging content built for modern audiences. From short-form edits to complete content systems, we find the story inside the footage and make it impossible to ignore.",
     portfolio: ["Brand documentary", "Narrative campaign film", "Title and motion package"],
     history: ["Recovered a fragmented production through a new narrative spine.", "Designed a tension-first edit and complete sonic identity."],
     pastEdits: [{ title: "Night Division", metric: "92% completion" }, { title: "Silent Cut", metric: "3 awards" }],
@@ -132,7 +132,7 @@ const differences = [
 
 const phases = [
   ["01", "The Debrief", "Setup, hardware and software audit, workflow map, and four weeks of live training calls."],
-  ["02", "Joint Investigation", "Your team and our agents co-produce while the handoff gets cleaner each week."],
+  ["02", "Joint Investigation", "Your team and our teams co-produce while the handoff gets cleaner each week."],
   ["03", "Full Takeover", "CONFIDENTIAL assumes the entire operation once your internal system is stable."],
 ];
 
@@ -156,15 +156,33 @@ function ConfidentialApp() {
     setSubmitted(true);
     setForm(initialForm);
   };
+
+  // Smooth reveal on scroll for home sections
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+
+    const reveals = document.querySelectorAll(".reveal");
+    reveals.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="noir-noise min-h-screen overflow-hidden bg-background text-foreground">
-      <div className="page-scan" aria-hidden="true" />
       <Header />
       <Hero />
-      <DifferenceFile />
-      <EvidenceBoard />
       <FieldAgents />
-      <AgencyAcademy />
+      <EvidenceBoard />
+      <DifferenceFile />
       <VsStandardAgencies />
       <AboutSection />
       <ClassifiedVault form={form} submitted={submitted} onChange={updateForm} onSubmit={handleSubmit} />
@@ -173,23 +191,42 @@ function ConfidentialApp() {
 }
 
 function Header() {
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const headerOffset = 72;
+    const y = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-4 sm:px-6 lg:px-8">
-        <a href="#top" className="flex min-w-0 items-center gap-3" aria-label="CONFIDENTIAL home">
+        <a
+          href="#top"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="flex min-w-0 items-center gap-3"
+          aria-label="CONFIDENTIAL home"
+        >
           <span className="h-2 w-2 shrink-0 bg-signal shadow-signal animate-status-blink" />
           <span className="font-display truncate text-lg font-bold sm:text-xl">CONFIDENTIAL_</span>
         </a>
         <nav className="hidden items-center gap-6 font-mono text-[10px] uppercase text-muted-foreground lg:flex">
-          <a href="#evidence" className="hover:text-signal">Evidence Board</a>
-          <a href="#agents" className="hover:text-signal">Field Agents</a>
-          <Link to="/work" className="hover:text-signal">Work</Link>
-          <a href="#academy" className="hover:text-signal">Academy</a>
-          <a href="#vs" className="text-signal hover:text-foreground">VS Standard</a>
-          <a href="#about" className="hover:text-signal">About</a>
-          <a href="#vault" className="hover:text-signal">Vault</a>
+          <a href="#evidence" onClick={(e) => { e.preventDefault(); scrollTo("evidence"); }} className="hover:text-signal transition-colors">Evidence Board</a>
+          <a href="#agents" onClick={(e) => { e.preventDefault(); scrollTo("agents"); }} className="hover:text-signal transition-colors">Field Teams</a>
+          <Link to="/work" viewTransition className="hover:text-signal transition-colors">Work</Link>
+          <a href="#vs" onClick={(e) => { e.preventDefault(); scrollTo("vs"); }} className="text-signal hover:text-foreground transition-colors">VS Standard</a>
+          <a href="#about" onClick={(e) => { e.preventDefault(); scrollTo("about"); }} className="hover:text-signal transition-colors">About</a>
+          <a href="#vault" onClick={(e) => { e.preventDefault(); scrollTo("vault"); }} className="hover:text-signal transition-colors">Vault</a>
         </nav>
-        <Button asChild variant="case" size="case"><a href="#intake"><LockKeyhole />Initiate Case</a></Button>
+        <Button asChild variant="case" size="case">
+          <a href="#intake" onClick={(e) => { e.preventDefault(); scrollTo("intake"); }}>
+            <LockKeyhole />Initiate Case
+          </a>
+        </Button>
       </div>
     </header>
   );
@@ -197,7 +234,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="relative min-h-[88vh] border-b border-border pt-32">
+    <section id="top" className="reveal is-visible relative min-h-[88vh] border-b border-border pt-32">
       <img src={agentB2B} alt="Anonymous confidential operative obscured by signal interference" width={768} height={960} loading="eager" className="absolute inset-y-20 right-[-16rem] h-[76vh] w-auto max-w-none opacity-35 grayscale sm:right-[-8rem] lg:right-[4vw]" />
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/20" />
       <div className="relative mx-auto flex max-w-7xl flex-col justify-center px-4 pb-24 sm:px-6 lg:min-h-[72vh] lg:px-8">
@@ -206,8 +243,8 @@ function Hero() {
           <h1 className="max-w-4xl font-display text-5xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">We uncover the hidden value in your content.</h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">High-retention video production, motion design, and data-driven storytelling handled as classified visual intelligence.</p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Button asChild variant="case" size="case"><a href="#evidence"><ScanLine />Open evidence board</a></Button>
-            <Button asChild variant="covert" size="case"><a href="#vs"><Target className="h-4 w-4" />Why We're Different</a></Button>
+            <Button asChild variant="case" size="case"><a href="#evidence" onClick={(e) => { e.preventDefault(); document.getElementById("evidence")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}><ScanLine />Open evidence board</a></Button>
+            <Button asChild variant="covert" size="case"><a href="#vs" onClick={(e) => { e.preventDefault(); document.getElementById("vs")?.scrollIntoView({ behavior: "smooth" }); }}><Target className="h-4 w-4" />Why We're Different</a></Button>
           </div>
           <div className="mt-14 grid max-w-xl grid-cols-3 border-y border-border py-4 font-mono text-[10px] uppercase text-muted-foreground">
             <Stat value="03" label="Operatives" /><Stat value="12" label="Case Files" /><Stat value="100%" label="Secure" />
@@ -224,7 +261,7 @@ function Stat({ value, label }: { value: string; label: string }) {
 
 function DifferenceFile() {
   return (
-    <section id="difference" className="px-4 py-24 sm:px-6 lg:px-8">
+    <section id="difference" className="reveal px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.7fr_1.3fr]">
         <div><SectionLabel>Difference file</SectionLabel><h2 className="mt-5 font-display text-4xl font-bold sm:text-5xl">Nothing enters the timeline without evidence.</h2></div>
         <div className="case-sheet grid gap-px border border-border bg-border sm:grid-cols-2">
@@ -239,9 +276,9 @@ function DifferenceFile() {
 
 function EvidenceBoard() {
   return (
-    <section id="evidence" className="border-y border-border bg-card/35 px-4 py-24 sm:px-6 lg:px-8">
+    <section id="evidence" className="reveal border-y border-border bg-card/35 px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div><SectionLabel>Case file / 005</SectionLabel><h2 className="mt-4 font-display text-4xl font-bold sm:text-5xl">Evidence transmission board.</h2></div><p className="max-w-lg text-muted-foreground">Five active reels. Original color transmission - no filter.</p></div>
+        <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div><SectionLabel>Case file / 005</SectionLabel><h2 className="mt-4 font-display text-4xl font-bold sm:text-5xl">Evidence board.</h2></div></div>
         <div className="evidence-board">
           <div className="absolute left-5 top-5 z-30 border border-signal/40 bg-background/90 px-3 py-2 font-mono text-[9px] uppercase text-signal">Live visual intelligence / encrypted / COLOR FEED</div>
           <svg className="laser-network" viewBox="0 0 1200 680" preserveAspectRatio="none" aria-hidden="true"><path d="M180 155 L600 330 L1010 165 M600 330 L255 540 M600 330 L955 535" /><circle cx="180" cy="155" r="5" /><circle cx="600" cy="330" r="6" /><circle cx="1010" cy="165" r="5" /><circle cx="255" cy="540" r="5" /><circle cx="955" cy="535" r="5" /></svg>
@@ -303,8 +340,8 @@ function EvidenceFrame({ reel, mobile = false }: { reel: Reel; mobile?: boolean 
 
 function FieldAgents() {
   return (
-    <section id="agents" className="px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl"><div className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between"><div><SectionLabel>Personnel record</SectionLabel><h2 className="mt-4 font-display text-4xl font-bold uppercase sm:text-5xl">Three active field agents.</h2></div><Button asChild variant="covert" size="case"><Link to="/work">View All Work</Link></Button></div>
+    <section id="agents" className="reveal px-4 py-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl"><div className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between"><div><SectionLabel>Personnel record</SectionLabel><h2 className="mt-4 font-display text-4xl font-bold uppercase sm:text-5xl">Three active field teams.</h2></div><Button asChild variant="covert" size="case"><Link to="/work" viewTransition>View All Work</Link></Button></div>
         <div className="grid gap-6 lg:grid-cols-3">{agents.map((agent) => <AgentCard key={agent.id} agent={agent} />)}</div>
       </div>
     </section>
@@ -318,7 +355,11 @@ function AgentCard({ agent }: { agent: Agent }) {
     <Card className="group/card overflow-hidden border-border bg-card/90 transition-colors hover:border-signal/60">
       <div className="agent-portrait relative aspect-[4/5] overflow-hidden bg-vault"><img src={agent.image} alt={`${agent.codename}`} width={768} height={960} loading="lazy" className="h-full w-full object-cover grayscale" /><div className="face-glitch" aria-hidden="true" /><div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" /><div className="absolute left-4 top-4 border border-border bg-background/85 px-3 py-2 font-mono text-[9px] text-muted-foreground"><Icon className="mr-2 inline h-3.5 w-3.5" />{agent.id}</div><div className="absolute bottom-4 left-4 border border-signal/50 px-3 py-1 font-mono text-[10px] uppercase text-signal -rotate-3">Identity redacted</div></div>
       <CardHeader className="p-5 pb-2"><Badge variant="outline" className="w-fit border-signal/40 bg-signal/10 font-mono text-signal">{agent.clearance}</Badge><CardTitle className="font-display text-2xl">{agent.codename}</CardTitle><p className="font-mono text-[10px] uppercase text-muted-foreground">{agent.niche}</p></CardHeader>
-      <CardContent className="p-5 pt-2"><p className="min-h-20 leading-6 text-muted-foreground">{agent.summary}</p><div className="mt-6 flex items-center justify-between border-t border-border pt-5"><span className="font-mono text-[10px] uppercase text-muted-foreground">Biometric access</span><Button asChild variant="fingerprint" size="fingerprint" className="fingerprint-plate"><Link to={agentLink}><FingerprintMark className="h-14 w-14 group-hover/card:animate-fingerprint-scan" /></Link></Button></div></CardContent>
+      <CardContent className="p-5 pt-2"><p className="min-h-20 leading-6 text-muted-foreground">{agent.summary}</p><div className="mt-6 flex items-center justify-between border-t border-border pt-5"><span className="font-mono text-[10px] uppercase text-muted-foreground">Verify Identity</span><Button asChild variant="fingerprint" size="fingerprint" className="fingerprint-plate h-28 w-28">
+  <Link to={agentLink} viewTransition>
+    <FingerprintMark className="h-24 w-24 group-hover/card:animate-fingerprint-scan" />
+  </Link>
+</Button></div></CardContent>
     </Card>
   );
 }
@@ -342,7 +383,7 @@ function VsStandardAgencies() {
     { label: "Speed vs Leverage", standard: "Fast and forgettable.", confidential: "Built for leverage. One shoot becomes 20+ assets, sales system, evergreen vault." },
   ];
   return (
-    <section id="vs" className="relative border-y border-border bg-background px-4 py-24 sm:px-6 lg:px-8">
+    <section id="vs" className="reveal relative border-y border-border bg-background px-4 py-24 sm:px-6 lg:px-8">
       <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-border to-transparent lg:block" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-4xl text-center">
@@ -359,7 +400,7 @@ function VsStandardAgencies() {
               <div className="bg-card p-6 sm:p-7 border-l-0 lg:border-l-2 border-l-signal/30"><div className="font-mono text-[10px] uppercase text-signal mb-2 flex items-center gap-2"><Check className="h-3.5 w-3.5" /> {row.label}</div><p className="text-sm leading-6 text-foreground font-medium">{row.confidential}</p></div>
             </div>
           ))}
-          <div className="bg-vault p-8 sm:p-10 text-center border-t border-border"><div className="mx-auto max-w-3xl"><p className="font-display text-2xl font-bold sm:text-3xl">We are not cheaper. We are not faster. We are <span className="text-signal">final.</span></p><p className="mt-4 font-mono text-[11px] uppercase text-muted-foreground">If you want another video, hire anyone. If you want a system that makes every future video perform, initiate case.</p><div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center"><Button asChild variant="case" size="case"><Link to="/work"><Eye className="h-4 w-4" />See The Difference In Work</Link></Button><Button asChild variant="covert" size="case"><a href="#about"><Skull className="h-4 w-4" />Read Agency Dossier</a></Button></div></div></div>
+          <div className="bg-vault p-8 sm:p-10 text-center border-t border-border"><div className="mx-auto max-w-3xl"><p className="font-display text-2xl font-bold sm:text-3xl">We are not cheaper. We are not faster. We are <span className="text-signal">final.</span></p><p className="mt-4 font-mono text-[11px] uppercase text-muted-foreground">If you want another video, hire anyone. If you want a system that makes every future video perform, initiate case.</p><div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center"><Button asChild variant="case" size="case"><Link to="/work" viewTransition><Eye className="h-4 w-4" />See The Difference In Work</Link></Button><Button asChild variant="covert" size="case"><a href="#about" onClick={(e) => { e.preventDefault(); document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }); }}><Skull className="h-4 w-4" />Read Agency Dossier</a></Button></div></div></div>
         </div>
         <div className="mt-8 grid grid-cols-3 border border-border bg-card/50 font-mono text-[10px] uppercase"><div className="p-4 text-center border-r border-border"><span className="text-muted-foreground">Standard Avg Retention</span><div className="mt-1 font-display text-xl font-bold text-muted-foreground">18%</div></div><div className="p-4 text-center border-r border-border bg-signal/5"><span className="text-signal">CONFIDENTIAL_ Avg Retention</span><div className="mt-1 font-display text-xl font-bold text-signal">68%</div></div><div className="p-4 text-center"><span className="text-muted-foreground">Difference</span><div className="mt-1 font-display text-xl font-bold text-foreground">+277%</div></div></div>
       </div>
@@ -369,15 +410,15 @@ function VsStandardAgencies() {
 
 function AboutSection() {
   return (
-    <section id="about" className="border-y border-border bg-card/35 px-4 py-24 sm:px-6 lg:px-8">
+    <section id="about" className="reveal border-y border-border bg-card/35 px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <SectionLabel>About file / Agency Dossier</SectionLabel>
             <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">A classified agency for founders who refuse to look average.</h2>
             <p className="mt-6 max-w-xl leading-8 text-muted-foreground">CONFIDENTIAL was built on one belief: most video agencies edit for aesthetics. We edit for <span className="text-foreground">retention, proof, and leverage</span>. Every frame is treated as visual intelligence.</p>
-            <div className="mt-8 grid grid-cols-3 border-y border-border py-6 font-mono text-[10px] uppercase"><div className="border-r border-border px-4"><div className="font-display text-2xl font-bold text-foreground">2019</div><div className="mt-1 text-muted-foreground">Est. Protocol</div></div><div className="border-r border-border px-4"><div className="font-display text-2xl font-bold text-foreground">03</div><div className="mt-1 text-muted-foreground">Active Cells</div></div><div className="px-4"><div className="font-display text-2xl font-bold text-signal">0</div><div className="mt-1 text-muted-foreground">Leaks</div></div></div>
-            <div className="mt-8 flex gap-3"><Button asChild variant="case" size="case"><a href="#agents"><Users className="h-4 w-4" />Meet Operatives</a></Button><Button asChild variant="covert" size="case"><Link to="/work">View Operations</Link></Button></div>
+            <div className="mt-8 grid grid-cols-3 border-y border-border py-6 font-mono text-[10px] uppercase"><div className="border-r border-border px-4"><div className="font-display text-2xl font-bold text-foreground">2026</div><div className="mt-1 text-muted-foreground">Est. Protocol</div></div><div className="border-r border-border px-4"><div className="font-display text-2xl font-bold text-foreground">03</div><div className="mt-1 text-muted-foreground">Active Teams</div></div><div className="px-4"><div className="font-display text-2xl font-bold text-signal">0</div><div className="mt-1 text-muted-foreground">Leaks</div></div></div>
+            <div className="mt-8 flex gap-3"><Button asChild variant="case" size="case"><a href="#agents" onClick={(e) => { e.preventDefault(); document.getElementById("agents")?.scrollIntoView({ behavior: "smooth" }); }}><Users className="h-4 w-4" />Meet Operatives</a></Button><Button asChild variant="covert" size="case"><Link to="/work" viewTransition>View Operations</Link></Button></div>
           </div>
           <div className="space-y-px border border-border bg-border"><div className="bg-card p-7"><div className="flex items-center gap-2 font-mono text-[10px] uppercase text-signal"><Eye className="h-4 w-4" /> Origins</div><h3 className="mt-4 font-display text-xl font-bold">Built inside high-stakes launches</h3><p className="mt-3 leading-7 text-muted-foreground">We started as an internal edit cell for B2B founders and creator brands running 7-figure launches. No templates, no junior editors, just direct response storytelling and forensic timeline audits.</p></div><div className="bg-card p-7"><div className="flex items-center gap-2 font-mono text-[10px] uppercase text-signal"><Zap className="h-4 w-4" /> Protocol</div><h3 className="mt-4 font-display text-xl font-bold">Evidence before ego</h3><p className="mt-3 leading-7 text-muted-foreground">Every cut has a reason: tension, proof, clarity, or emotional consequence. We isolate hook decay, pacing gaps, and the exact frame where attention disappears — then rebuild the narrative around proof.</p></div><div className="bg-card p-7"><div className="flex items-center gap-2 font-mono text-[10px] uppercase text-signal"><ShieldCheck className="h-4 w-4" /> Clearance</div><h3 className="mt-4 font-display text-xl font-bold">Secured workflows, traceable versions</h3><p className="mt-3 leading-7 text-muted-foreground">Compartmentalized assets, controlled access, and disciplined handoffs from intake to export. Your footage never leaks. Your revisions are tracked. Your exports are verified.</p></div></div>
         </div>
@@ -388,8 +429,8 @@ function AboutSection() {
 
 function ClassifiedVault({ form, submitted, onChange, onSubmit }: { form: IntakeForm; submitted: boolean; onChange: (field: IntakeField) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void; onSubmit: (event: FormEvent<HTMLFormElement>) => void }) {
   return (
-    <section id="vault" className="px-4 py-24 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr]"><div><SectionLabel>Classified vault</SectionLabel><h2 className="mt-4 font-display text-4xl font-bold sm:text-5xl">Open a secure case line.</h2><p className="mt-6 max-w-lg leading-8 text-muted-foreground">Brief the agency. Your file enters a controlled review and is assigned to the right operative.</p><div className="mt-10 border-l-2 border-signal pl-5 font-mono text-xs uppercase text-muted-foreground">Current response window<br/><span className="text-foreground">Within 24 hours</span></div></div>
-      <form id="intake" onSubmit={onSubmit} className="border border-border bg-card p-6 sm:p-8"><div className="mb-8 flex items-center justify-between"><div><p className="font-mono text-[10px] uppercase text-signal">Intake terminal</p><h3 className="mt-2 font-display text-2xl font-bold">Initiate Case</h3></div><Send className="h-6 w-6 text-signal" /></div><div className="grid gap-5 sm:grid-cols-2"><Field label="Codename"><Input id="name" value={form.name} onChange={onChange("name")} placeholder="Brand or operator" required /></Field><Field label="Channel"><Input id="channel" value={form.channel} onChange={onChange("channel")} placeholder="YouTube, ads, launch" required /></Field><Field label="Mission objective" wide><Textarea id="objective" value={form.objective} onChange={onChange("objective")} placeholder="Describe the footage, objective, audience, and deadline." required className="min-h-32" /></Field><Field label="Operating budget" wide><Input id="budget" value={form.budget} onChange={onChange("budget")} placeholder="$2.5K, $6K, or custom" /></Field></div><Button type="submit" variant="case" size="case" className="mt-6 w-full"><LockKeyhole />Transmit Case File</Button>{submitted && <div className="mt-5 border border-signal/50 bg-signal/10 p-4 font-mono text-xs uppercase text-signal">Case file transmitted. Clearance desk is standing by.</div>}</form>
+    <section id="vault" className="reveal px-4 py-24 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr]"><div><SectionLabel>Classified vault</SectionLabel><h2 className="mt-4 font-display text-4xl font-bold sm:text-5xl">Open a secure case line.</h2><p className="mt-6 max-w-lg leading-8 text-muted-foreground">Brief the agency. Your file enters a controlled review and is assigned to the right operative.</p><div className="mt-10 border-l-2 border-signal pl-5 font-mono text-xs uppercase text-muted-foreground">Current response window<br/><span className="text-foreground">Within 24 hours</span></div></div>
+      <form id="intake" onSubmit={onSubmit} className="border border-border bg-card p-6 sm:p-8"><div className="mb-8 flex items-center justify-between"><div><p className="font-mono text-[10px] uppercase text-signal">Intake terminal</p><h3 className="mt-2 font-display text-2xl font-bold">Initiate Case</h3></div><Send className="h-6 w-6 text-signal" /></div><div className="grid gap-5 sm:grid-cols-2"><Field label="Codename"><Input id="name" value={form.name} onChange={onChange("name")} placeholder="Brand or operator" required /></Field><Field label="Channel"><Input id="channel" value={form.channel} onChange={onChange("channel")} placeholder="YouTube, ads, launch" required /></Field><Field label="Visual Direction" wide><Textarea id="objective" value={form.objective} onChange={onChange("objective")} placeholder="Describe the footage, objective, audience, and deadline." required className="min-h-32" /></Field><Field label="Operating budget" wide><Input id="budget" value={form.budget} onChange={onChange("budget")} placeholder="$2.5K, $6K, or custom" /></Field></div><Button type="submit" variant="case" size="case" className="mt-6 w-full"><LockKeyhole />Transmit Case File</Button>{submitted && <div className="mt-5 border border-signal/50 bg-signal/10 p-4 font-mono text-xs uppercase text-signal">Case file transmitted. Clearance desk is standing by.</div>}</form>
     </div></section>
   );
 }

@@ -78,8 +78,11 @@
 .dark { color-scheme: dark; }
 
 @layer base {
-    * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * { border-color: var(--color-border); }
+  html { 
+    scroll-behavior: smooth; 
+    scroll-padding-top: 80px;
+  }
   body { min-width: 320px; overflow-x: hidden; background: var(--background); color: var(--foreground); font-family: var(--font-body); letter-spacing: 0; }
   input, textarea { border-color: var(--border); background: color-mix(in oklab, var(--background) 78%, transparent); color: var(--foreground); }
   input::placeholder, textarea::placeholder { color: var(--muted-foreground); }
@@ -203,4 +206,104 @@
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}
+
+/* --- SMOOTH NAVIGATION + REVEAL ANIMATIONS --- */
+
+/* Page transition - new page fade in with movement */
+@keyframes team-enter {
+  0% { opacity: 0; filter: blur(16px) brightness(0.9); transform: scale(0.985) translateY(14px); }
+  30% { opacity: 0; }
+  100% { opacity: 1; filter: blur(0) brightness(1); transform: scale(1) translateY(0); }
+}
+
+@keyframes team-leave {
+  0% { opacity: 1; filter: blur(0); transform: scale(1) translateY(0); }
+  100% { opacity: 0; filter: blur(12px); transform: scale(1.02) translateY(-10px); }
+}
+
+@keyframes team-content-in {
+  from { opacity: 0; transform: translateY(28px); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+::view-transition-old(root) {
+  animation: 380ms cubic-bezier(0.7, 0, 0.84, 0) both team-leave;
+}
+
+::view-transition-new(root) {
+  animation: 900ms cubic-bezier(0.16, 1, 0.3, 1) both team-enter;
+}
+
+::view-transition-group(*) {
+  animation-duration: 800ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-image-pair(*) {
+  isolation: isolate;
+}
+
+.team-enter-left {
+  animation: team-content-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 120ms;
+}
+
+.team-enter-right {
+  animation: team-content-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 280ms;
+}
+
+.team-enter-right > div > div {
+  animation: team-content-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.team-enter-right > div > div:nth-child(1) { animation-delay: 320ms; }
+.team-enter-right > div > div:nth-child(2) { animation-delay: 420ms; }
+.team-enter-right > div > div:nth-child(3) { animation-delay: 520ms; }
+.team-enter-right > div > div:nth-child(4) { animation-delay: 620ms; }
+.team-enter-right > div > div:nth-child(5) { animation-delay: 720ms; }
+
+/* Home page reveal on scroll - same language as team pages */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(8px);
+  transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1), 
+              transform 800ms cubic-bezier(0.22, 1, 0.36, 1), 
+              filter 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Stagger children inside reveal */
+.reveal.is-visible .case-sheet > div,
+.reveal.is-visible .grid > div {
+  animation: team-content-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal.is-visible .case-sheet > div:nth-child(1) { animation-delay: 100ms; }
+.reveal.is-visible .case-sheet > div:nth-child(2) { animation-delay: 180ms; }
+.reveal.is-visible .case-sheet > div:nth-child(3) { animation-delay: 260ms; }
+.reveal.is-visible .case-sheet > div:nth-child(4) { animation-delay: 340ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  .team-enter-left,
+  .team-enter-right,
+  .team-enter-right > div > div,
+  .reveal,
+  .reveal.is-visible {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
