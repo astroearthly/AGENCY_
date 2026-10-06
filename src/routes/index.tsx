@@ -76,7 +76,7 @@ export const agents: Agent[] = [
     clearance: "Growth Intelligence",
     image: agentB2B,
     Icon: BriefcaseBusiness,
-    summary: "We shape raw footage into cinematic stories with rhythm, atmosphere, and purpose. From commercial edits to narrative-driven films, we control every cut to make the final piece feel intentional.",
+     summary: "We shape raw footage into cinematic stories with rhythm, atmosphere, and purpose. From commercial edits to narrative-driven films, we control every cut to make the final piece feel intentional.",
     portfolio: ["Founder authority series", "Product launch film", "Demand generation cutdowns"],
     history: ["Reframed a technical demo around proof before process.", "Built a modular sales-video system from one interview day."],
     pastEdits: [{ title: "Proof Sequence", metric: "+43% hold" }, { title: "Launch Intercept", metric: "2.1x CTR" }],
