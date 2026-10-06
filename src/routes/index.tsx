@@ -72,7 +72,7 @@ export const agents: Agent[] = [
   {
     codename: "TEAM 01",
     id: "44-B2B-01",
-    niche: "FILM",
+    niche: "FILM — DIRECTED // ANDREA",
     clearance: "Growth Intelligence",
     image: agentB2B,
     Icon: BriefcaseBusiness,
@@ -116,11 +116,11 @@ type Reel = {
 };
 
 const reels: Reel[] = [
-  { id: "CAM_01", title: "THE OPENING STATEMENT", src: "AcR63v-NlRs", placement: "evidence-a", type: "youtube" },
-  { id: "INTEL_02", title: "PRODUCT PROOF", src: "1230757187", placement: "evidence-b", type: "vimeo" },
+  { id: "CAM_01", title: "THE OPENING STATEMENT", src: "1233412733", placement: "evidence-a", type: "vimeo" },
+  { id: "INTEL_02", title: "PRODUCT PROOF", src: "1233477591", placement: "evidence-b", type: "vimeo" },
   { id: "PRIMARY_03", title: "FRACTURE - Cinematic Edit", src: "1164198582", placement: "evidence-main", type: "vimeo" },
-  { id: "TRACE_04", title: "CREATOR SIGNAL", src: "usHwnPdk49o", placement: "evidence-c", type: "youtube" },
-  { id: "ARCHIVE_05", title: "FINAL TRANSMISSION", src: "pPw_EAdMeh4", placement: "evidence-d", type: "youtube" },
+  { id: "TRACE_04", title: "CREATOR SIGNAL", src: "1140005276", placement: "evidence-c", type: "vimeo" },
+  { id: "ARCHIVE_05", title: "FINAL TRANSMISSION", src: "1231097359", placement: "evidence-d", type: "vimeo" },
 ];
 
 const differences = [
@@ -292,47 +292,67 @@ function EvidenceBoard() {
 function EvidenceFrame({ reel, mobile = false }: { reel: Reel; mobile?: boolean }) {
   const isVimeo = reel.type === "vimeo";
   const isYoutube = reel.type === "youtube";
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Switch autoplay to 1 and mute to 0 only when hovered
+  const vimeoSrc = isHovered 
+    ? `https://player.vimeo.com/video/${reel.src}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=0&loop=1&controls=0&title=0&byline=0&portrait=0&sidedock=0`
+    : `https://player.vimeo.com/video/${reel.src}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=0&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&sidedock=0`;
+
+  const youtubeSrc = isHovered
+    ? `https://www.youtube.com/embed/${reel.src}?autoplay=1&mute=0&loop=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playlist=${reel.src}&playsinline=1`
+    : `https://www.youtube.com/embed/${reel.src}?autoplay=0&mute=1&loop=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playlist=${reel.src}&playsinline=1`;
 
   return (
-<article className={cn("evidence-frame group overflow-hidden", mobile ? "relative" : reel.placement)} tabIndex={0}>
+    <article 
+      className={cn("evidence-frame group overflow-hidden", mobile ? "relative" : reel.placement)} 
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      tabIndex={0}
+    >
       {isVimeo ? (
         <iframe
-          src={`https://player.vimeo.com/video/${reel.src}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1&title=0&byline=0&portrait=0`}
+          key={isHovered ? "vimeo-play" : "vimeo-idle"}
+          src={vimeoSrc}
           title={reel.title}
-          className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-105"
+          className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-105 pointer-events-none"
           style={{ border: 0 }}
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
           referrerPolicy="strict-origin-when-cross-origin"
         />
       ) : isYoutube ? (
         <iframe
-          src={`https://www.youtube.com/embed/${reel.src}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playlist=${reel.src}&playsinline=1`}
+          key={isHovered ? "yt-play" : "yt-idle"}
+          src={youtubeSrc}
           title={reel.title}
-          className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-105"
+          className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-105 pointer-events-none"
           style={{ border: 0 }}
           allow="autoplay; encrypted-media; fullscreen"
         />
       ) : (
         <video 
           src={reel.src} 
-          muted 
-          autoPlay 
+          muted={!isHovered} 
+          autoPlay={isHovered} 
           loop 
           playsInline 
           preload="metadata" 
           crossOrigin="anonymous"
           aria-label={`${reel.title} portfolio reel`} 
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" 
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105 pointer-events-none" 
           style={{ border: 0 }}
         />
       )}
+
       <div className="absolute inset-0 border border-border/50 group-hover:border-signal/50 transition-colors pointer-events-none" aria-hidden="true" />
       <div className="frame-scan pointer-events-none" aria-hidden="true" />
+
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/80 to-transparent p-4 pt-12 pointer-events-none">
-        <p className="font-mono text-[9px] text-signal">{reel.id} / PLAYING • COLOR</p>
+        <p className="font-mono text-[9px] text-signal">
+          {reel.id} / {isHovered ? "LIVE FEED // AUDIO ACTIVE" : "SIGNAL STANDBY"}
+        </p>
         <h3 className="mt-1 font-display text-sm font-bold text-foreground sm:text-base drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]">{reel.title}</h3>
       </div>
-      <Play className="absolute right-4 top-4 h-5 w-5 text-foreground/80 transition group-hover:text-signal group-hover:scale-110 drop-shadow pointer-events-none" />
     </article>
   );
 }
@@ -513,7 +533,7 @@ function ClassifiedVault({
           </Button>
 
           {submitted && (
-            <div className="mt-5 border border-signal/50 bg-signal/10 p-4 font-mono text-xs uppercase text-signal">
+            <div className="mt-5 border border-emerald-500/50 bg-emerald-500/10 p-4 font-mono text-xs uppercase text-emerald-400">
               Case file transmitted. Clearance desk is standing by.
             </div>
           )}
