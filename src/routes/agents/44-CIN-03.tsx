@@ -12,6 +12,9 @@ function Card3Page() {
     "https://player.vimeo.com/video/1231088285?background=1&autoplay=1&loop=1&byline=0&title=0",
     "https://player.vimeo.com/video/1231088286?background=1&autoplay=1&loop=1&byline=0&title=0",
     "https://player.vimeo.com/video/1231115435?background=1&autoplay=1&loop=1&byline=0&title=0",
+    "https://player.vimeo.com/video/1233377528?background=1&autoplay=1&loop=1&byline=0&title=0",
+    "https://player.vimeo.com/video/1233378177?background=1&autoplay=1&loop=1&byline=0&title=0",
+    "https://player.vimeo.com/video/1233378383?background=1&autoplay=1&loop=1&byline=0&title=0",
   ];
 
   return (
@@ -123,6 +126,27 @@ function Card3Page() {
                   <iframe src={vids[2]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_03 // DEMAND CUTDOWNS" />
                 </div>
                 <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_03 // DEMAND CUTDOWNS</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
+              </div>
+
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none" style={{ viewTransitionName: "team03-cam04" } as any}>
+                <div className="relative w-full aspect-[9/16] bg-black">
+                  <iframe src={vids[3]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_04 // CREATOR NARRATIVE" />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_04 // CREATOR NARRATIVE</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
+              </div>
+
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none" style={{ viewTransitionName: "team03-cam05" } as any}>
+                <div className="relative w-full aspect-[9/16] bg-black">
+                  <iframe src={vids[4]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_05 // SOCIAL HOOK" />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_05 // SOCIAL HOOK</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
+              </div>
+
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none" style={{ viewTransitionName: "team03-cam06" } as any}>
+                <div className="relative w-full aspect-[9/16] bg-black">
+                  <iframe src={vids[5]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_06 // AUDIENCE RETENTION" />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_06 // AUDIENCE RETENTION</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
               </div>
 
             </div>
