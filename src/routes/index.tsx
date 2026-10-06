@@ -65,7 +65,7 @@ export type Agent = {
   pastEdits: Array<{ title: string; metric: string }>;
 };
 
-type IntakeField = "name" | "channel" | "objective" | "budget";
+type IntakeField = "name" | "email" | "channel" | "objective" | "budget";
 type IntakeForm = Record<IntakeField, string>;
 
 export const agents: Agent[] = [
@@ -142,8 +142,7 @@ const pricing = [
   ["Black File", "Custom", "Dedicated agent deployment and multi-format coverage."],
 ];
 
-const initialForm: IntakeForm = { name: "", channel: "", objective: "", budget: "" };
-
+const initialForm: IntakeForm = { name: "", email: "", channel: "", objective: "", budget: "" };
 function ConfidentialApp() {
   const [form, setForm] = useState<IntakeForm>(initialForm);
   const [submitted, setSubmitted] = useState(false);
@@ -427,11 +426,106 @@ function AboutSection() {
   );
 }
 
-function ClassifiedVault({ form, submitted, onChange, onSubmit }: { form: IntakeForm; submitted: boolean; onChange: (field: IntakeField) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void; onSubmit: (event: FormEvent<HTMLFormElement>) => void }) {
+function ClassifiedVault({ 
+  form, 
+  submitted, 
+  onChange, 
+  onSubmit 
+}: { 
+  form: IntakeForm; 
+  submitted: boolean; 
+  onChange: (field: IntakeField) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void; 
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void 
+}) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(false);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xbgdddag", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (response.ok) {
+        onSubmit(e);
+      } else {
+        setError(true);
+      }
+    } catch (err) {
+      setError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <section id="vault" className="reveal px-4 py-24 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr]"><div><SectionLabel>Classified vault</SectionLabel><h2 className="mt-4 font-display text-4xl font-bold sm:text-5xl">Open a secure case line.</h2><p className="mt-6 max-w-lg leading-8 text-muted-foreground">Brief the agency. Your file enters a controlled review and is assigned to the right operative.</p><div className="mt-10 border-l-2 border-signal pl-5 font-mono text-xs uppercase text-muted-foreground">Current response window<br/><span className="text-foreground">Within 24 hours</span></div></div>
-      <form id="intake" onSubmit={onSubmit} className="border border-border bg-card p-6 sm:p-8"><div className="mb-8 flex items-center justify-between"><div><p className="font-mono text-[10px] uppercase text-signal">Intake terminal</p><h3 className="mt-2 font-display text-2xl font-bold">Initiate Case</h3></div><Send className="h-6 w-6 text-signal" /></div><div className="grid gap-5 sm:grid-cols-2"><Field label="Codename"><Input id="name" value={form.name} onChange={onChange("name")} placeholder="Brand or operator" required /></Field><Field label="Channel"><Input id="channel" value={form.channel} onChange={onChange("channel")} placeholder="YouTube, ads, launch" required /></Field><Field label="Visual Direction" wide><Textarea id="objective" value={form.objective} onChange={onChange("objective")} placeholder="Describe the footage, objective, audience, and deadline." required className="min-h-32" /></Field><Field label="Operating budget" wide><Input id="budget" value={form.budget} onChange={onChange("budget")} placeholder="$2.5K, $6K, or custom" /></Field></div><Button type="submit" variant="case" size="case" className="mt-6 w-full"><LockKeyhole />Transmit Case File</Button>{submitted && <div className="mt-5 border border-signal/50 bg-signal/10 p-4 font-mono text-xs uppercase text-signal">Case file transmitted. Clearance desk is standing by.</div>}</form>
-    </div></section>
+    <section id="vault" className="reveal px-4 py-24 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <SectionLabel>Classified vault</SectionLabel>
+          <h2 className="mt-4 font-display text-4xl font-bold sm:text-5xl">Open a secure case line.</h2>
+          <p className="mt-6 max-w-lg leading-8 text-muted-foreground">Brief the agency. Your file enters a controlled review and is assigned to the right operative.</p>
+          <div className="mt-10 border-l-2 border-signal pl-5 font-mono text-xs uppercase text-muted-foreground">
+            Current response window<br/>
+            <span className="text-foreground">Within 24 hours</span>
+          </div>
+        </div>
+        
+        <form id="intake" onSubmit={handleFormSubmit} className="border border-border bg-card p-6 sm:p-8">
+          <div className="mb-8 flex items-center justify-between">
+            <div>
+              <p className="font-mono text-[10px] uppercase text-signal">Intake terminal</p>
+              <h3 className="mt-2 font-display text-2xl font-bold">Initiate Case</h3>
+            </div>
+            <Send className="h-6 w-6 text-signal" />
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field label="Codename">
+              <Input id="name" value={form.name} onChange={onChange("name")} placeholder="Brand or operator" required />
+            </Field>
+            <Field label="Secure Email">
+              <Input id="email" type="email" value={form.email} onChange={onChange("email")} placeholder="operator@brand.com" required />
+            </Field>
+            <Field label="Channel" wide>
+              <Input id="channel" value={form.channel} onChange={onChange("channel")} placeholder="YouTube, ads, launch" required />
+            </Field>
+            <Field label="Visual Direction" wide>
+              <Textarea id="objective" value={form.objective} onChange={onChange("objective")} placeholder="Describe the footage, objective, audience, and deadline." required className="min-h-32" />
+            </Field>
+            <Field label="Operating budget" wide>
+              <Input id="budget" value={form.budget} onChange={onChange("budget")} placeholder="$2.5K, $6K, or custom" />
+            </Field>
+          </div>
+
+          <Button type="submit" variant="case" size="case" className="mt-6 w-full" disabled={isSubmitting}>
+            <LockKeyhole />
+            {isSubmitting ? "Transmitting Signal..." : "Transmit Case File"}
+          </Button>
+
+          {submitted && (
+            <div className="mt-5 border border-signal/50 bg-signal/10 p-4 font-mono text-xs uppercase text-signal">
+              Case file transmitted. Clearance desk is standing by.
+            </div>
+          )}
+
+          {error && (
+            <div className="mt-5 border border-red-500/50 bg-red-500/10 p-4 font-mono text-xs uppercase text-red-400">
+              Transmission failed. Check network connection and retry.
+            </div>
+          )}
+        </form>
+      </div>
+    </section>
   );
 }
 

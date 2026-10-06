@@ -114,10 +114,10 @@ function Card1Page() {
                   </p>
 
                   <div className="pt-2 space-y-1 font-mono text- uppercase leading-[1.8] text-muted-foreground">
-  <div>Direction: <span className="text-foreground normal-case">Andrea Passalacqua</span></div>
-  <div>Editing: <span className="text-foreground normal-case">Andrea Passalacqua</span></div>
-  <div>Color Grading: <span className="text-foreground normal-case">Andrea Passalacqua</span></div>
-  <div>Sound Design: <span className="text-foreground normal-case">Andrea Passalacqua</span></div>
+  <div>Direction: <span className="text-foreground normal-case">Andrea</span></div>
+  <div>Editing: <span className="text-foreground normal-case">Andrea</span></div>
+  <div>Color Grading: <span className="text-foreground normal-case">Andrea</span></div>
+  <div>Sound Design: <span className="text-foreground normal-case">Andrea</span></div>
 </div>
                 </div>
               </div>
