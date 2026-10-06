@@ -11,10 +11,13 @@ function Card3Page() {
   const vids = [
     "https://player.vimeo.com/video/1231088285?background=1&autoplay=1&loop=1&byline=0&title=0",
     "https://player.vimeo.com/video/1231088286?background=1&autoplay=1&loop=1&byline=0&title=0",
-    "https://player.vimeo.com/video/1231115435?background=1&autoplay=1&loop=1&byline=0&title=0",
+    "https://player.vimeo.com/video/1233412575?autoplay=1&loop=1&autopause=0&background=1",
     "https://player.vimeo.com/video/1233377528?background=1&autoplay=1&loop=1&byline=0&title=0",
     "https://player.vimeo.com/video/1233378177?background=1&autoplay=1&loop=1&byline=0&title=0",
     "https://player.vimeo.com/video/1233378383?background=1&autoplay=1&loop=1&byline=0&title=0",
+    "https://player.vimeo.com/video/1233404735?autoplay=1&loop=1&autopause=0&background=1",
+    "https://player.vimeo.com/video/1233407649?autoplay=1&loop=1&autopause=0&background=1",
+    "https://player.vimeo.com/video/1233412733?autoplay=1&loop=1&autopause=0&background=1",
   ];
 
   return (
@@ -116,7 +119,7 @@ function Card3Page() {
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none" style={{ viewTransitionName: "team03-cam02" } as any}>
                 <div className="relative w-full aspect-[9/16] bg-black">
-                  <iframe src={vids[1]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen;  picture-in-picture" title="CAM_02 // PRODUCT PROOF" />
+                  <iframe src={vids[1]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_02 // PRODUCT PROOF" />
                 </div>
                 <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_02 // PRODUCT PROOF</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">2.1x CTR</Badge></div>
               </div>
@@ -147,6 +150,28 @@ function Card3Page() {
                   <iframe src={vids[5]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_06 // AUDIENCE RETENTION" />
                 </div>
                 <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_06 // AUDIENCE RETENTION</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
+              </div>
+
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
+                <div className="relative w-full aspect-[9/16] bg-black">
+                  <iframe src={vids[6]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_07 // CONVERSION ENGINE" />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_07 // CONVERSION ENGINE</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
+              </div>
+
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
+                <div className="relative w-full aspect-[9/16] bg-black">
+                  <iframe src={vids[7]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_08 // ENGAGEMENT LOOP" />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_08 // ENGAGEMENT LOOP</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
+              </div>
+
+              {/* CAM_09 updated to 16:9 aspect ratio */}
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
+                <div className="relative w-full aspect-video bg-black">
+                  <iframe src={vids[8]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_09 // SIGNAL FEED" />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_09 // SIGNAL FEED</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
               </div>
 
             </div>

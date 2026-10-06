@@ -13,6 +13,9 @@ function Card2Page() {
     "https://player.vimeo.com/video/1231097359?background=1&autoplay=1&loop=1&byline=0&title=0",
     "https://player.vimeo.com/video/1231478353?background=1&autoplay=1&loop=1&byline=0&title=0",
     "https://player.vimeo.com/video/1231479208?background=1&autoplay=1&loop=1&byline=0&title=0",
+    "https://player.vimeo.com/video/1233408216?background=1&autoplay=1&loop=1&byline=0&title=0",
+    "https://player.vimeo.com/video/1233415173?background=1&autoplay=1&loop=1&byline=0&title=0",
+    "https://player.vimeo.com/video/1233416925?background=1&autoplay=1&loop=1&byline=0&title=0",
   ];
 
   return (
@@ -127,6 +130,27 @@ function Card2Page() {
               <div className="border border-border bg-black overflow-hidden" style={{ viewTransitionName: "team02-cam04" } as any}>
                 <div className="relative w-full aspect-video bg-black"><iframe src={vids[3]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_04 // ARCHIVE CUT" /></div>
                 <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_04 // ARCHIVE CUT</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">NEW</Badge></div>
+              </div>
+
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
+                <div className="relative w-full aspect-[9/16] bg-black">
+                  <iframe src={vids[4]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_05 // MOTION SYSTEM" />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_05 // MOTION SYSTEM</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
+              </div>
+
+              <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
+                <div className="relative w-full aspect-[9/16] bg-black">
+                  <iframe src={vids[5]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_06 // KINETIC IDENTITY" />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_06 // KINETIC IDENTITY</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
+              </div>
+
+              <div className="border border-border bg-black overflow-hidden">
+                <div className="relative w-full aspect-video bg-black">
+                  <iframe src={vids[6]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_07 // SIGNAL STREAM" />
+                </div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_07 // SIGNAL STREAM</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
               </div>
 
             </div>
