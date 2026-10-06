@@ -89,6 +89,12 @@ function Card2Page() {
                 <div className="space-y-3">
                   <div className="font-mono text-[13px] uppercase tracking-[0.18em] text-signal">Credits</div>
                   <p className="text-[14px] leading-[1.6] text-muted-foreground">Selected work across brand systems, campaigns, product visuals, and motion-led content.</p>
+                  <div className="pt-2 space-y-1 font-mono text- uppercase leading-[1.8] text-muted-foreground">
+  <div>Editing: <span className="text-foreground normal-case">David, Andrea, Naru, Xia</span></div>
+  <div>Motion Design: <span className="text-foreground normal-case">David, Andrea, Naru, Xia</span></div>
+  <div>Direction: <span className="text-foreground normal-case">David, Andrea, Naru, Xia</span></div>
+  <div>Color grading: <span className="text-foreground normal-case">David, Andrea, Naru, Xia</span></div>
+</div>
                 </div>
               </div>
 
@@ -115,43 +121,37 @@ function Card2Page() {
 
               <div className="border border-border bg-black overflow-hidden" style={{ viewTransitionName: "team02-cam02" } as any}>
                 <div className="relative w-full aspect-video bg-black">
-                  <iframe src={vids[1]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_02 // FILM VLOG" />
+                  <iframe src={vids[1]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_02 // FILM VLOG - CEREBRAS" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_02 // FILM VLOG</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">2.1x CTR</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_02 // CEREBRAS</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // DAVID</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">2.1x CTR</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden" style={{ viewTransitionName: "team02-cam03" } as any}>
                 <div className="relative w-full aspect-video bg-black">
                   <iframe src={vids[2]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_03 // DEMAND CUTDOWNS" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_03 // DEMAND CUTDOWNS</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_03 // DEMAND CUTDOWNS</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // XIA</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden" style={{ viewTransitionName: "team02-cam04" } as any}>
                 <div className="relative w-full aspect-video bg-black"><iframe src={vids[3]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_04 // ARCHIVE CUT" /></div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_04 // ARCHIVE CUT</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">NEW</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_04 // ARCHIVE CUT</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // NARU</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">NEW</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
                 <div className="relative w-full aspect-[9/16] bg-black">
-                  <iframe src={vids[4]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_05 // MOTION SYSTEM" />
+                  <iframe src={vids[4]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_05 // PODCAST" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_05 // MOTION SYSTEM</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_05 // PODCAST</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // ANDREA</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
                 <div className="relative w-full aspect-[9/16] bg-black">
-                  <iframe src={vids[5]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_06 // KINETIC IDENTITY" />
+                  <iframe src={vids[5]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_06 // DERM - HEALTH" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_06 // KINETIC IDENTITY</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_06 // DERM -  HEALTH</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // ANDREA</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden">
                 <div className="relative w-full aspect-video bg-black">
                   <iframe src={vids[6]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_07 // SIGNAL STREAM" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_07 // SIGNAL STREAM</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_07 // SIGNAL STREAM</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // NARU</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
             </div>
           </div>

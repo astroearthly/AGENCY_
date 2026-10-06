@@ -112,6 +112,13 @@ function Card1Page() {
                   <p className="text-[14px] leading-[1.6] text-muted-foreground">
                     Selected work across product, brand, commercial, and campaign films.
                   </p>
+
+                  <div className="pt-2 space-y-1 font-mono text- uppercase leading-[1.8] text-muted-foreground">
+  <div>Direction: <span className="text-foreground normal-case">Andrea Passalacqua</span></div>
+  <div>Editing: <span className="text-foreground normal-case">Andrea Passalacqua</span></div>
+  <div>Color Grading: <span className="text-foreground normal-case">Andrea Passalacqua</span></div>
+  <div>Sound Design: <span className="text-foreground normal-case">Andrea Passalacqua</span></div>
+</div>
                 </div>
               </div>
 
@@ -132,34 +139,31 @@ function Card1Page() {
               
               <div className="border border-border bg-black overflow-hidden" style={{ viewTransitionName: "team01-cam01" } as any}>
                 <div className="aspect-video bg-black"><video src={vids[0]} autoPlay muted loop playsInline className="h-full w-full object-cover" /></div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_01 // FOUNDER AUTHORITY</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">+43% HOLD</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_01 // FOUNDER AUTHORITY - EXPERIMENTAL</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // ANDREA</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">+43% HOLD</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden" style={{ viewTransitionName: "team01-cam02" } as any}>
                 <div className="relative w-full aspect-video bg-black">
                   <iframe src={vids[1]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_02 // FILM VLOG" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_02 // FILM VLOG</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">2.1x CTR</Badge></div>
+                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_02 // FILM VLOG</div>
+                <div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // ANDREA</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">2.1x CTR</Badge></div>
               </div>
 
               <div className="border border-border bg-black overflow-hidden" style={{ viewTransitionName: "team01-cam03" } as any}>
                 <div className="relative w-full aspect-video bg-black">
-                  <iframe src={vids[2]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_03 // DEMAND CUTDOWNS" />
+                  <iframe src={vids[2]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_03 // ZERO HOUR - EXPERIMENTAL" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_03 // DEMAND CUTDOWNS</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_03 // ZERO HOUR - EXPERIMENTAL</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // ANDREA</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden" style={{ viewTransitionName: "team01-cam04" } as any}>
-                <div className="relative w-full aspect-video bg-black"><iframe src={vids[3]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_04 // ARCHIVE CUT" /></div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_04 // ARCHIVE CUT</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">NEW</Badge></div>
-              </div>
+                <div className="relative w-full aspect-video bg-black"><iframe src={vids[3]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_04 // PSYCHE" /></div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_04 // PSYCHE</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // ANDREA</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">NEW</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden" style={{ viewTransitionName: "team01-cam05" } as any}>
                 <div className="relative w-full aspect-video bg-black">
-                  <iframe src={vids[4]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_05 // PRODUCT PROOF" />
+                  <iframe src={vids[4]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_05 // FILM VLOG V2" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_05 // PRODUCT PROOF</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">NEW CUT</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_05 // FILM VLOG - V2</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // ANDREA</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">NEW CUT</Badge></div>              </div>
 
             </div>
           </div>

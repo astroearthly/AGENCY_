@@ -91,6 +91,11 @@ function Card3Page() {
                 <div className="space-y-3">
                   <div className="font-mono text-[13px] uppercase tracking-[0.18em] text-signal">Credits</div>
                   <p className="text-[14px] leading-[1.6] text-muted-foreground">Selected work across creators, personal brands, social campaigns, and product-led content.</p>
+                  <div className="pt-2 space-y-1 font-mono text- uppercase leading-[1.8] text-muted-foreground">
+  <div>Direction: <span className="text-foreground normal-case">Andrea</span></div>
+  <div>Editing: <span className="text-foreground normal-case">David,Andrea,Bre,Rics Briones, Ayman</span></div>
+  <div>Motion Design: <span className="text-foreground normal-case">Ayman, David, Andrea</span></div>
+</div>
                 </div>
               </div>
 
@@ -114,65 +119,56 @@ function Card3Page() {
                 <div className="relative w-full aspect-[9/16] bg-black">
                   <iframe src={vids[0]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_01 // FOUNDER AUTHORITY" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_01 // FOUNDER AUTHORITY</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">+43% HOLD</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_01 // LECTEX</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // ANDREA</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">+43% HOLD</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none" style={{ viewTransitionName: "team03-cam02" } as any}>
                 <div className="relative w-full aspect-[9/16] bg-black">
                   <iframe src={vids[1]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_02 // PRODUCT PROOF" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_02 // PRODUCT PROOF</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">2.1x CTR</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_02 // PRODUCT PROOF</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // AYMAN</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">2.1x CTR</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none" style={{ viewTransitionName: "team03-cam03" } as any}>
                 <div className="relative w-full aspect-[9/16] bg-black">
                   <iframe src={vids[2]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_03 // DEMAND CUTDOWNS" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_03 // DEMAND CUTDOWNS</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_03 // DEMAND CUTDOWNS</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // RICS BRIONES</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none" style={{ viewTransitionName: "team03-cam04" } as any}>
                 <div className="relative w-full aspect-[9/16] bg-black">
                   <iframe src={vids[3]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_04 // CREATOR NARRATIVE" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_04 // CREATOR NARRATIVE</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_04 // CREATOR NARRATIVE</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // DAVID</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none" style={{ viewTransitionName: "team03-cam05" } as any}>
                 <div className="relative w-full aspect-[9/16] bg-black">
                   <iframe src={vids[4]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_05 // SOCIAL HOOK" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_05 // SOCIAL HOOK</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_05 // SOCIAL HOOK</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // DAVID</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none" style={{ viewTransitionName: "team03-cam06" } as any}>
                 <div className="relative w-full aspect-[9/16] bg-black">
                   <iframe src={vids[5]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_06 // AUDIENCE RETENTION" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_06 // AUDIENCE RETENTION</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_06 // AUDIENCE RETENTION</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // DAVID</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
                 <div className="relative w-full aspect-[9/16] bg-black">
                   <iframe src={vids[6]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_07 // CONVERSION ENGINE" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_07 // CONVERSION ENGINE</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_07 // CONVERSION ENGINE</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // NARU</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
                 <div className="relative w-full aspect-[9/16] bg-black">
                   <iframe src={vids[7]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_08 // ENGAGEMENT LOOP" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_08 // ENGAGEMENT LOOP</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_08 // ENGAGEMENT LOOP</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // ANDREA</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
               {/* CAM_09 updated to 16:9 aspect ratio */}
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none">
                 <div className="relative w-full aspect-video bg-black">
                   <iframe src={vids[8]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_09 // SIGNAL FEED" />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_09 // SIGNAL FEED</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">VERIFIED</Badge></div>
-              </div>
+<div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="flex flex-col"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_09 // SIGNAL FEED</div><div className="font-mono text- uppercase tracking-wide text-muted-foreground">EDITED BY // BRE</div></div><Badge variant="outline" className="font-mono text- border-signal/30 text-signal">VERIFIED</Badge></div>              </div>
 
             </div>
           </div>
