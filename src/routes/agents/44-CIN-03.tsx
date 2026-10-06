@@ -116,7 +116,7 @@ function Card3Page() {
 
               <div className="border border-border bg-black overflow-hidden max-w-xl mx-auto lg:max-w-none" style={{ viewTransitionName: "team03-cam02" } as any}>
                 <div className="relative w-full aspect-[9/16] bg-black">
-                  <iframe src={vids[1]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen; picture-in-picture" title="CAM_02 // PRODUCT PROOF" />
+                  <iframe src={vids[1]} className="absolute inset-0 h-full w-full object-cover border-0 pointer-events-none" allow="autoplay; fullscreen;  picture-in-picture" title="CAM_02 // PRODUCT PROOF" />
                 </div>
                 <div className="flex items-center justify-between px-4 py-3 bg-background border-t border-border"><div className="font-display text-sm font-bold tracking-widest uppercase">CAM_02 // PRODUCT PROOF</div><Badge variant="outline" className="font-mono text-[11px] border-signal/30 text-signal">2.1x CTR</Badge></div>
               </div>
